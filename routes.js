@@ -1,11 +1,12 @@
+//Import needed packages
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 
 //GET ROUTES
 const home = (req, res) => {
-  console.log("Session: ", req.session);
-  res.render("home");
+  const user = req.session.user;
+  res.render("home", { user });
 };
 const register = (req, res) => {
   res.render("register");
@@ -14,30 +15,26 @@ const notLoggedIn = (req, res) => {
   res.render("notLoggedIn");
 };
 const logOut = (req, res) => {
+  //Destroying sessions when user wants to log out
   req.session.destroy();
   res.render("register");
 };
 const debt = async (req, res) => {
+  //Getting user's debt
   const userId = req.session.userId;
   const user = await User.findById(userId); // get user information from database
   const debt = user.debt;
   res.json({ debt }); // return debt amount as JSON data
 };
-const payment = async (req, res) => {
-  if (req.body.success) {
-    const user = await User.findById(req.session.userId); // get user information
-    user.premium = true; // update user's premium status
-    await user.save(); // save the updated user object
-  }
-  res.render("payment");
-};
 
 //POST ROUTES
 const { Configuration, OpenAIApi } = require("openai");
 const config = new Configuration({
+  //Setting your OPENAI API-key
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(config);
+//Creating new prompt
 const runPrompt = async (prompt) => {
   try {
     const response = await openai.createCompletion({
@@ -49,7 +46,6 @@ const runPrompt = async (prompt) => {
       frequency_penalty: 0.5,
       presence_penalty: 0,
     });
-    console.log("Session: ", req.session);
     return response.data.choices[0].text;
   } catch (error) {
     console.log(error);
@@ -80,7 +76,7 @@ const signUp = async (req, res) => {
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send("Email aldready exist!");
 
-  //Hashing
+  //Encypting user's password
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   //Create a account
@@ -93,6 +89,7 @@ const signUp = async (req, res) => {
   });
   try {
     const savedUser = await user.save();
+    //Session implementing
     req.session.userId = user._id;
     res.render("home", { user });
   } catch (error) {
@@ -112,18 +109,16 @@ const signIn = async (req, res) => {
   if (!validPass)
     return res.status(400).send("Email or password is incorrect!");
 
-  // Create the token
   req.session.userId = user._id;
   res.render("home", { user });
 };
 
 const updateUserMiddleware = async (req, res, next) => {
-  console.log("Session: ", req.session);
   try {
     // Check if user is logged in
-    const userExist = req.session.user;
-    if (userExist) {
-      return res.redirect("/register");
+    const userID = req.session.userId;
+    if (!userID) {
+      return res.redirect("/notLoggedIn");
     }
 
     // Update user information and set in session
@@ -142,13 +137,13 @@ const updateUserMiddleware = async (req, res, next) => {
   }
 };
 
+//Exporting functions
 module.exports = {
   home: home,
   register: register,
   notLoggedIn: notLoggedIn,
   logOut: logOut,
   debt: debt,
-  payment: payment,
   fixer: fixer,
   signUp: signUp,
   signIn: signIn,
