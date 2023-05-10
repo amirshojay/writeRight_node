@@ -1,7 +1,7 @@
 # Intructions:
 
 - Download or clone the project
-- Run **'npm install to install'** the necessary npm packages.
+- Run **'npm install'** to install the necessary npm packages.
 - Create a **'.env'** file in the root directory with the following information:
 
 ```bash
