@@ -1,9 +1,8 @@
 # Intructions:
-
-    1. Run npm install in order to install needed npm packages
-    2. Create your .env file in the root directory, containing :
-        - MONGODB_URI = "your-mongodb-connection-link"
-        - OPENAI_API_KEY = "your-openai-api-key"
+    - Run 'npm install to install' the necessary npm packages.
+    - Create a '.env' file in the root directory with the following information:
+        'MONGODB_URI="your-mongodb-connection-link"'
+        'OPENAI_API_KEY="your-openai-api-key"'
 
 # Logs:
 
