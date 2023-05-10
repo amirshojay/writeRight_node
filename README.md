@@ -4,7 +4,8 @@
     2- Create a '.env' file in the root directory with the following information:
         'MONGODB_URI="your-mongodb-connection-link"'
         'OPENAI_API_KEY="your-openai-api-key"'
-    3-If you want to make changes to the scss codes and you are using VS-Code editor install 'Live Sass Compiler' as an extension in order to compile your scss code
+    3-If you want to make changes to the scss codes and you are using VS-Code editor install
+    'Live Sass Compiler' as an extension in order to compile your scss code
 
 # Logs:
 
