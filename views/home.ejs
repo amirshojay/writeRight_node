@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/sass/home.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="video-bg">
+      <video width="320" height="240" autoplay loop muted>
+        <source
+          src="https://assets.codepen.io/3364143/7btrrd.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="dark-light">
+      <svg
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+      </svg>
+    </div>
+    <% if(!user.premium){ %>
+    <div class="overlay-subscription">
+        <div class="subscription">
+            <img src="/subscribe.png" alt="" class="img-subscribe"/>
+            <p>You have no active plan yet, or you have exceeded your word limit, upgrade to premium to use the website!</p>
+            <a href="https://buy.stripe.com/28o7u64X0bDV5Hi4gg"><button class="content-button">Upgrade to premium</button></a>
+        </div>
+    </div>
+    <% } %>
+    <div class="app">
+      <div class="header">
+        <a href="/logOut"><div class="menu-circle" id="logout">Logout</div></a>
+        <div class="header-menu">
+          <a class="menu-link is-active" href="#">App</a>
+          <a class="menu-link" href="#">Support</a>
+          <a class="menu-link" href="#">Pricing</a>
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="header-profile">
+          <div class="notification" id="notification">
+            <span class="notification-number">1</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-bell"
+            >
+              <path
+                d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"
+              />
+            </svg>
+            <div class="notification-layer hidden" id="debtAmount">
+              <p>Your current debt is: <span></span> kr</p>
+            </div>
+          </div>
+          <svg viewBox="0 0 512 512" fill="currentColor">
+            <path
+              d="M448.773 235.551A135.893 135.893 0 00451 211c0-74.443-60.557-135-135-135-47.52 0-91.567 25.313-115.766 65.537-32.666-10.59-66.182-6.049-93.794 12.979-27.612 19.013-44.092 49.116-45.425 82.031C24.716 253.788 0 290.497 0 331c0 7.031 1.703 13.887 3.006 20.537l.015.015C12.719 400.492 56.034 436 106 436h300c57.891 0 106-47.109 106-105 0-40.942-25.053-77.798-63.227-95.449z"
+            />
+          </svg>
+          <img
+            class="profile-img"
+            src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="main-container">
+          <div class="content-wrapper">
+            <div class="content-section">
+                <form action="/fixer" method="post" target="hidden-iframe">
+              <div class="content-section-title">Input</div>
+              <textarea
+                placeholder="Paste your text here"
+                name="prompt"
+                id="userInput"
+              ></textarea>
+            </div>
+            <div class="content-section">
+              <div class="content-section-title">
+                Output
+                <button class="content-button" type="submit" id="userBtn">Process</button>
+                </form>
+              </div>
+              <textarea
+                placeholder="Reformated text will be shown here"
+                id="userOutput"
+              ></textarea>
+              <iframe id="hidden-iframe" name="hidden-iframe" style="display: none;"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay-app"></div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.getElementById('hidden-iframe').onload = function() {
+        const responseText = this.contentDocument.body.innerHTML;
+        const textarea = document.getElementById('userOutput');
+        textarea.value = responseText;
+    };
+    $(function () {
+    $(".menu-link").click(function () {
+      $(".menu-link").removeClass("is-active");
+      $(this).addClass("is-active");
+    });
+    $(".main-header-link").click(function () {
+      $(".main-header-link").removeClass("is-active");
+      $(this).addClass("is-active");
+    });
+    $(".search-bar input")
+  .focus(function () {
+    $(".header").addClass("wide");
+  })
+  .blur(function () {
+    $(".header").removeClass("wide");
+  });
+
+$(document).click(function (e) {
+  var container = $(".status-button");
+  var dd = $(".dropdown");
+  if (!container.is(e.target) && container.has(e.target).length === 0) {
+    dd.removeClass("is-active");
+  }
+});
+
+$(function () {
+  $(".dropdown").on("click", function (e) {
+    $(".content-wrapper").addClass("overlay");
+    e.stopPropagation();
+  });
+  $(document).on("click", function (e) {
+    if ($(e.target).is(".dropdown") === false) {
+      $(".content-wrapper").removeClass("overlay");
+    }
+  });
+});
+
+$(function () {
+  $(".status-button:not(.open)").on("click", function (e) {
+    $(".overlay-app").addClass("is-active");
+  });
+  $(".pop-up .close").click(function () {
+    $(".overlay-app").removeClass("is-active");
+  });
+});
+
+$(".status-button:not(.open)").click(function () {
+  $(".pop-up").addClass("visible");
+});
+
+$(".pop-up .close").click(function () {
+  $(".pop-up").removeClass("visible");
+});
+
+const toggleButton = document.querySelector(".dark-light");
+
+toggleButton.addEventListener("click", () => {
+  document.body.classList.toggle("light-mode");
+});
+  }
+);
+$(document).ready(function() {
+  const debtContainer = $('#debtAmount');
+  const notification = $('#notification');
+
+  notification.on('click', function() {
+    $.get('/debt', function(data) {
+      debtContainer.find('span').text(data.debt); // update debt amount dynamically
+      debtContainer.toggleClass('hidden');
+    });
+  });
+});
+  </script>
+</html>
