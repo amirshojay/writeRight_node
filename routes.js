@@ -1,7 +1,10 @@
 const bcrypt = require("bcrypt");
-const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
+
 //GET ROUTES
 const home = (req, res) => {
+  console.log("Session: ", req.session);
   res.render("home");
 };
 const register = (req, res) => {
@@ -32,7 +35,7 @@ const payment = async (req, res) => {
 //POST ROUTES
 const { Configuration, OpenAIApi } = require("openai");
 const config = new Configuration({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(config);
 const runPrompt = async (prompt) => {
@@ -46,6 +49,7 @@ const runPrompt = async (prompt) => {
       frequency_penalty: 0.5,
       presence_penalty: 0,
     });
+    console.log("Session: ", req.session);
     return response.data.choices[0].text;
   } catch (error) {
     console.log(error);
@@ -114,9 +118,11 @@ const signIn = async (req, res) => {
 };
 
 const updateUserMiddleware = async (req, res, next) => {
+  console.log("Session: ", req.session);
   try {
     // Check if user is logged in
-    if (!req.session.userId) {
+    const userExist = req.session.user;
+    if (userExist) {
       return res.redirect("/register");
     }
 
