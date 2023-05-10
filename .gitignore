@@ -1,4 +1,7 @@
 node_modules/
 views/css/
+public/sass/home.css.map
+public/sass/notLoggedIn.css.map
+public/sass/register.css.map
 kkk2/
 .env
