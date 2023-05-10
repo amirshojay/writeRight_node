@@ -1,11 +1,15 @@
 # Intructions:
 
-- Run 'npm install to install' the necessary npm packages.
-- Create a '.env' file in the root directory with the following information:
-  'MONGODB_URI="your-mongodb-connection-link"'
-  'OPENAI_API_KEY="your-openai-api-key"'
-- If you want to make changes to the scss codes and you are using VS-Code editor install
-  'Live Sass Compiler' as an extension in order to compile your scss code
+- Download or clone the project
+- Run **'npm install to install'** the necessary npm packages.
+- Create a **'.env'** file in the root directory with the following information:
+
+```bash
+   MONGODB_URI="your-mongodb-connection-link"
+   OPENAI_API_KEY="your-openai-api-key"
+```
+
+- If you want to make changes to the SCSS codes and you are using **VS-Code editor** install **'Live Sass Compiler'** as an extension in order to compile your SCSS code
 
 # Logs:
 
@@ -60,9 +64,3 @@ My supervisor suggested that we use Sass instead of regular CSS for the project,
 ## 4 May
 
 I attempted to use Stripe webhooks to receive notifications when a user subscribed to a premium plan, but was unsuccessful due to time constraints and other challenges encountered during the project. As a result, I made the decision to manually handle subscription information in the database. When a user subscribes, I update their information in the database, allowing them to access the website.
-
-
-## Authors
-
-- [@amirshojay](https://www.github.com/amirshojay)
-
