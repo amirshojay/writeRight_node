@@ -11,7 +11,7 @@
 
 - If you want to make changes to the SCSS codes and you are using **VS-Code editor** install **'Live Sass Compiler'** as an extension in order to compile your SCSS code
 
-# Logs:
+# ✍🏻 Logs:
 
 ## 2 February
 
@@ -65,7 +65,7 @@ My supervisor suggested that we use Sass instead of regular CSS for the project,
 
 I attempted to use Stripe webhooks to receive notifications when a user subscribed to a premium plan, but was unsuccessful due to time constraints and other challenges encountered during the project. As a result, I made the decision to manually handle subscription information in the database. When a user subscribes, I update their information in the database, allowing them to access the website.
 
-## 👋 Authors 
+## 👋 Authors
 
 - [@amirshojay](https://www.github.com/amirshojay)
 
@@ -73,4 +73,4 @@ I attempted to use Stripe webhooks to receive notifications when a user subscrib
 
 - [@lararjason](https://github.com/lararjason)
 
-![Logo](https://www.lbs.se/wp-content/uploads/2019/05/facebook_lbs_logo.jpg)
+![Logo](https://www.gymnasieguiden.se/files/school/logo/1196/lbs_logo.webp?v=1601628006)
