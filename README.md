@@ -65,11 +65,11 @@ My supervisor suggested that we use Sass instead of regular CSS for the project,
 
 I attempted to use Stripe webhooks to receive notifications when a user subscribed to a premium plan, but was unsuccessful due to time constraints and other challenges encountered during the project. As a result, I made the decision to manually handle subscription information in the database. When a user subscribes, I update their information in the database, allowing them to access the website.
 
-## 👋 Authors
+## 👋 Author
 
 - [@amirshojay](https://www.github.com/amirshojay)
 
-## 🚀 Supervisor
+## 🚀 Supervisors
 
 - [@kjellhyling](https://se.linkedin.com/in/kjell-lennart-hayling-6181b512)
 - [@lararjason](https://github.com/lararjason)
