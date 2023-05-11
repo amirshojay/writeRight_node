@@ -71,6 +71,7 @@ I attempted to use Stripe webhooks to receive notifications when a user subscrib
 
 ## 🚀 Supervisor
 
+- [@kjellhyling](https://se.linkedin.com/in/kjell-lennart-hayling-6181b512)
 - [@lararjason](https://github.com/lararjason)
 
 ![Logo](https://mb.cision.com/Public/2355/202171/bda4acac24accdaf_org.jpg)
