@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  margin: -20px 0;
 }
 h1 {
   font-weight: bold;
@@ -197,4 +197,30 @@ input {
 }
 .test {
   color: black;
+}
+.cookie_bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 5vh;
+  background-color: #ff4b2b;
+  display: flex;
+  flex-direction: space-around;
+  justify-content: space-around;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  font-size: 26px;
+  z-index: 10;
+}
+.cookie_bar_btn {
+  padding: 5px 7px;
+  border-radius: 2px;
+  background: #ff416c;
+  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  cursor: pointer;
+}
+.none {
+  display: none;
 }

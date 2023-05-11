@@ -48,6 +48,14 @@
       </div>
     </div>
     <div id="error-message" class="error-message"></div>
+    <div class="cookie_bar" id="cookie_bar">
+      <p>cookie</p>
+      <p>
+        By using this website, you aggree that we use cookies to deliver best
+        user experience.
+      </p>
+      <button class="cookie_bar_btn" id="cookie_bar_btn">X</button>
+    </div>
     <script>
       const signUpButton = document.getElementById("signUp");
       const signInButton = document.getElementById("signIn");
@@ -59,6 +67,11 @@
       });
       signInButton.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
+      });
+      const cookie_bar = document.getElementById("cookie_bar");
+      const cookie_btn = document.getElementById("cookie_bar_btn");
+      cookie_btn.addEventListener("click", () => {
+        cookie_bar.classList.add("none");
       });
     </script>
   </body>
