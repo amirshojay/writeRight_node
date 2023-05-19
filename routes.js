@@ -30,7 +30,7 @@ const debt = async (req, res) => {
 //POST ROUTES
 const { Configuration, OpenAIApi } = require("openai");
 const config = new Configuration({
-  //Setting your OPENAI API-key
+  //Setting OPENAI API-key
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(config);

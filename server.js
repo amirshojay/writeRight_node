@@ -1,4 +1,4 @@
-//Import needed packages
+//Import necessary packages
 const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
@@ -8,8 +8,11 @@ const bodyParser = require("body-parser");
 const app = express();
 const routes = require("./routes");
 
+// Set the view engine to "ejs" for rendering dynamic views
 app.set("view engine", "ejs");
+// Middleware to parse incoming request bodies as urlencoded data
 app.use(bodyParser.urlencoded({ extended: false }));
+// Middleware to handle user sessions
 app.use(
   session({
     secret: "putYourOwnSecret",
@@ -17,8 +20,9 @@ app.use(
     saveUninitialized: false,
   })
 );
+// Middleware to serve static files from the "public" directory
 app.use(express.static("public"));
-
+// Load environment variables from the ".env" file
 dotenv.config();
 
 //Connecting to the database
